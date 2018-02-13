@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet author="akoziy" id="dbcreation">
+		<sqlFile dbms="mysql" encoding="utf8" path="../sql/dbcreation.sql" endDelimiter=";" relativeToChangelogFile="true" splitStatements="true" stripComments="false" />
+		<rollback>
+			<sql>rollback;</sql>
+		</rollback>
+	</changeSet>
+	<changeSet author="akoziy" id="dbinitialdata">
+		<sqlFile dbms="mysql" encoding="utf8" path="../sql/dbinitialdata.sql" endDelimiter=";" relativeToChangelogFile="true" splitStatements="true" stripComments="false" />
+		<rollback>
+			<sql>rollback;</sql>
+		</rollback>
+	</changeSet>
+	<changeSet id="create-temporary-user-to-create-password-hashes"	author="akoziy">
+		<sql>
+			INSERT INTO `user_app` (`id`,`name`,`login`,`password`,`phone`,`role`,`remember_me_token`,`is_deleted`,`surname`,`position`,`is_administrator`, `sha2_password`) VALUES (9999,'HASH CREATE USER','hash.create','sha1:64000:18:tP3PoAYbeRQuRChieQ1c271YXT5RqpEb:tS1q6tuPExqGaZ3JixkCyZJy',NULL,NULL,NULL,0,NULL,'TEMPORARY / UTIL',1,'');
+		</sql>
+
+		<rollback>
+			<sql>
+				DELETE FROM user_app WHERE login = 'hash.create';
+			</sql>
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

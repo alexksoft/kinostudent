@@ -1,0 +1,63 @@
+<zk xmlns:x="xhtml" xmlns:zk="zk" xmlns:n="native" xmlns:h="native">
+<idspace id="loginWin"
+		onOK="@command('loginCheck')"
+		viewModel="@id('vm') @init('com.ks.ui.login.Login')">
+		<custom-attributes org.zkoss.zul.image.preload="true" />
+
+		<vbox align="center" width="100%" height="100%" pack="center" >					
+		<div sclass="login_box" visible="true">
+		
+		
+		
+				<hbox sclass="transparent_cell">
+				
+						<grid id="myGrid" oddRowSclass="" sclass="login_grid">
+						
+							<columns>
+								<column  label="" width="100px"></column>
+								<column label="" width="300px"></column>
+							</columns>
+							<rows>
+							
+							
+							<row>
+									<cell sclass="headline_cell" colspan="2" align="center">
+										 <n:h1>Admin</n:h1> 
+									</cell>
+									
+								</row>
+							
+								<row>
+																
+								<cell align="center" valign="middle" sclass="transparent_cell">
+								<h:i class="fa-user fa-2x"></h:i>
+										<label class="login_form_element" id="label_login" value="" />
+									</cell>
+									<cell align="left" sclass="transparent_cell">
+										<textbox id="username" value="" placeholder="username" mold="rounded" />
+									</cell>
+								</row>
+								<row>
+									<cell align="center" valign="middle" sclass="transparent_cell" >
+										<h:i class="fa-lock fa-2x"></h:i>
+										<label id="label_password"  value="" />
+									</cell>
+									<cell align="left" sclass="transparent_cell" >
+										<textbox id="password" value="" placeholder="* * * * * * *" mold="rounded"
+												type="password"	 />
+									</cell>
+								</row>					
+								<row>
+									<cell sclass="transparent_cell" colspan="2" align="right"  >
+										<button
+												id="loginBtn" label="login" width="80%" sclass="mark-class loginBtn"
+												onClick="@command('loginCheck')"/>
+									</cell>
+								</row>
+							</rows>
+						</grid>
+				</hbox>
+			</div>
+			</vbox>
+</idspace>
+</zk>

@@ -1,0 +1,99 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+        xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jee="http://www.springframework.org/schema/jee" 
+        xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:task="http://www.springframework.org/schema/task"
+        
+		xsi:schemaLocation="http://www.springframework.org/schema/aop 
+						classpath:org/springframework/aop/config/spring-aop-4.3.xsd
+                        http://www.springframework.org/schema/beans 
+                        classpath:org/springframework/beans/factory/xml/spring-beans-4.3.xsd
+                        http://www.springframework.org/schema/context 
+                        classpath:org/springframework/context/config/spring-context-4.3.xsd
+                        http://www.springframework.org/schema/jee 
+                        classpath:org/springframework/ejb/config/spring-jee-4.3.xsd 
+                        http://www.springframework.org/schema/tx 
+                        classpath:org/springframework/transaction/config/spring-tx-4.3.xsd
+                        http://www.springframework.org/schema/task 
+                        classpath:org/springframework/scheduling/config/spring-task-4.3.xsd">
+    <!-- This is the jndi datasource for the application (non-privileged) -->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	    <property name="jndiName" value="java:comp/env/jdbc/applicationDS"/>
+	</bean>
+    
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/configuration.properties</value>
+			</list>
+		</property>
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.physical_naming_strategy">${hibernate.physical_naming_strategy}</prop>
+				<prop key="hibernate.implicit_naming_strategy">${hibernate.implicit_naming_strategy}</prop>
+				<prop key="hibernate.c3p0.acquire_increment">${hibernate.c3p0.acquireIncrement}</prop>
+				<prop key="hibernate.c3p0.idle_test_period">${hibernate.c3p0.idleConnectionTestPeriod}</prop>
+				<prop key="hibernate.c3p0.timeout">${hibernate.c3p0.maxIdleTime}</prop>
+				<prop key="hibernate.c3p0.max_size">${hibernate.c3p0.maxPoolSize}</prop>
+				<prop key="hibernate.c3p0.min_size">${hibernate.c3p0.minPoolSize}</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.cache.use_second_level_cache">${hibernate.cache.use_second_level_cache}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">${hibernate.enable_lazy_load_no_trans}</prop>
+				<prop key="hibernate.connection.CharSet">utf8</prop>
+		        <prop key="hibernate.connection.characterEncoding">utf8</prop>
+		        <prop key="hibernate.connection.useUnicode">true</prop>
+				<!-- <prop key="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</prop> -->
+			</props>
+		</property>
+		<!-- Package to scan for entity classes -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.ks.db.hibernate</value>
+			</list>
+		</property>
+		<property name="annotatedPackages">
+			<list>
+				<value>com.ks.db.hibernate</value>
+			</list>
+		</property>
+    </bean>
+  
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Apply persistence exception translation on @Repository classes -->
+	<bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    
+    <!-- for using annotation @Transaction in DAOs -->
+    <tx:annotation-driven  transaction-manager="transactionManager"/>
+	<!-- JOBS -->
+	<task:annotation-driven />
+
+	<!-- Auto scan for spring beans -->
+	<context:component-scan base-package="com.ks.dao.impl" />
+	<context:component-scan base-package="com.ks.service.impl" />
+</beans>
+
+

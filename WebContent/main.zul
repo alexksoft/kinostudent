@@ -1,0 +1,35 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns:h="native">
+<window id="outerIndexWindow" 
+	border="none" 
+	height="99.5%" 
+	width="99.5%"
+	viewModel="@id('vm') @init('com.ks.ui.Index')">
+	<custom-attributes org.zkoss.zul.image.preload="true" />	
+	<style src="/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <div height="100%" width="100%" align="center">
+		<borderlayout id="borderlayoutMain" height="100%" width="100%">
+			<north id="borderlayoutMainNorth" border="none" height="50px" splittable="false">
+            <menubar id="menubar" width="100%">
+                <menu label="Дані">
+                    <menupopup>
+                        <menuitem label="Video" onClick="@command('showWindow', path='/WEB-INF/pages/videos.zul')" image="/images/Pictures-Library-icon.png" />
+                        <menuitem label="Texts" onClick="@command('showWindow', path='/WEB-INF/pages/texts.zul')" image="/images/Actions-edit-select-all-icon.png" />
+                        <menuitem label="Grammar rules" onClick="@command('showWindow', path='/WEB-INF/pages/rules.zul')" image="/images/Comment-edit-icon.png" />
+                    </menupopup>
+                </menu>
+                <menu label="Налаштування">
+                    <menupopup>
+                        <menuitem label="Users" onClick="@command('showWindow', path='/WEB-INF/pages/users.zul')" image="/images/Users-icon.png" />
+                     </menupopup>
+                </menu>
+            </menubar>
+			</north>
+			<center id="center" margins="0,0,0,0" hflex="1" autoscroll="true">
+  				<!-- include id="content"/-->	
+			</center>
+			
+		</borderlayout>
+	</div>
+</window>
+</zk>

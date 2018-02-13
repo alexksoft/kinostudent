@@ -1,0 +1,168 @@
+<?page title="Home" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/demo.css.dsp"?>
+<zk>
+	<zscript><![CDATA[
+	import org.zkoss.zk.ui.util.*;
+	
+	if (execution.isBrowser("ie7-")) {
+		System.out.println(execution.isBrowser("ie7-"));
+		Clients.showNotification("Internet Explorer 6/7 doesn't support in this demo!");
+	}
+	boolean firsttime = true;
+	void doOrientationChange(ClientInfoEvent evt) {
+		
+		if ("portrait".equals(evt.getOrientation())) {
+			main.setWidth("100%");
+			if (evt.getDesktopWidth() < 640)
+				sv.setVisible(false);
+		} else {
+			if (!execution.isBrowser("mobile"))
+				main.setWidth("80%");
+			else
+				sv.setVisible(false);
+		}
+		if (!firsttime)
+			Clients.resize(main);
+		firsttime = false;
+	}
+]]></zscript>
+	<borderlayout>
+		<north style="text-align:center;">
+			<label style="font-family:Monotype Corsiva;font-size:44px;" value="Kinostudent"/>
+		</north>
+	<center>
+	<tabbox xmlns:ca="client/attribute" ca:data-swipeable="true" id="main" sclass="main" width="${zk.mobile > 0 ? '100%' : '80%'}"
+		vflex="1" onClientInfo="doOrientationChange(event)" tabscroll="false"
+		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ks.ui.IndexVM')">
+	<!-- 	<custom-attributes org.zkoss.zul.image.preload="true" /> -->
+		<tabs  style="text-align:center;">
+			<tab label="Главная" image="/images/icons/icon_zk_white.png"/>
+			
+			<tab label="Видео" image="/images/icons/icon_friendrequests_white.png"/>
+
+			<tab label="Чтение" image="/images/icons/icon_messagestop_white.png"/>
+
+			<tab label="Словарь" image="/images/icons/icon_messagestop_white.png"/>
+
+			<tab label="Грамматика" image="/images/icons/icon_messagestop_white.png"/>
+
+			<tab label="Вопросы" image="/images/icons/icon_messagestop_white.png"/>
+
+			<tab label="Контакты" image="/images/icons/icon_messagestop_white.png"/>
+		</tabs>
+		<tabpanels vflex="1" hflex="1">
+			<tabpanel vflex="1" hflex="1">
+				<vlayout style="padding:40px;text-align: justify;">
+					
+					<label style="font-family:Cambria Math;font-size:16px;margin-top:40px;" value="Этот сайт предназначен для людей, изучающих русский язык как иностранный. Если у вас есть знакомые-иностранцы, обязательно пригласите их посетить эти уроки. Изложенная далее информация предназначена для них."></label>
+										
+					<label style="font-family:Cambria Math;font-size:16px; margin-left:60px;margin-top:40px;" value="Интересно, хочу попробовать бесплатно"></label>
+	
+					<label style="font-family:Cambria Math;font-size:16px;" value="Видео (название) "></label>
+					<html>
+						<script type="text/javascript" src="//s3.spruto.org/embed/player.js"></script> <script class="splayer"> var params = {"playlist":[{"video":[{"url":"http://p.spruto2.pulter.netdna-cdn.com/vod/spruto2.pulter/promo_eng.mp4"}],"duration":0,"posterUrl":"//s3.spruto.org/images/Spse_02_spruto_player_screen_eng_1024.jpg"}],"uiLanguage":"en","width":"640","height":"360"}; player.embed(params); </script>
+	
+					</html>
+					<label style="font-family:Cambria Math;font-size:16px;" value="Текст (название)"></label>
+	
+					<label style="font-family:Cambria Math;font-size:16px;" value="Купить абонемент и получить неограниченный доступ к материалам"></label>
+				</vlayout>
+
+<!-- 				<hlayout id="content" sclass="main-content" vflex="1">
+					<div id="sv" vflex="1" hflex="1"
+						children="@init(vm.profiles)">
+						<template name="children" var="profile">
+							<groupbox mold="3d" sclass="profile" hflex="1">
+								<vlayout>
+									<hlayout>
+										<image sclass="@bind(profile.ownerIcon)" />
+										<vlayout>
+											<a sclass="fullname" label="@bind(profile.author)" />
+											<label value="View my profile page" style="color:gray" />
+										</vlayout>
+									</hlayout>
+									<hlayout sclass="status">
+										<div sclass="vbar first-vbar" hflex="1">
+											<label sclass="number" value="@bind(profile.tweets)" />
+											<separator />
+											<label sclass="text" value="TWEETS" />
+										</div>
+										<div sclass="vbar" hflex="1">
+											<label sclass="number" value="@bind(profile.following)" />
+											<separator />
+											<label sclass="text" value="FOLLOWING" />
+										</div>
+										<div sclass="vbar" hflex="1">
+											<label sclass="number" value="@bind(profile.followers)" />
+											<separator />
+											<label sclass="text" value="FOLLOWERS" />
+										</div>
+									</hlayout>
+									<textbox rows="2" placeholder="Compose new Tweet..."
+										multiline="true" hflex="1" />
+								</vlayout>
+							</groupbox>
+						</template>
+					</div>
+					<listbox model="@load(vm.connects)" vflex="1" hflex="1">
+						<template name="model" var="tweet">
+							<listitem>
+								<listcell>
+									<hlayout>
+										<image sclass="@load(tweet.authorIcon)" />
+										<div hflex="1">
+											<label sclass="author" value="@load(tweet.author)" />
+											<separator />
+											<label width="90%" sclass="content" multiline="true"
+												value="@load(tweet.content)" />
+										</div>
+									</hlayout>
+								</listcell>
+							</listitem>
+						</template>
+					</listbox>
+				</hlayout> -->
+			</tabpanel>
+			<tabpanel sclass="connects" vflex="1" hflex="1">
+				<listbox model="@load(vm.stories)" vflex="1" hflex="1">
+					<template name="model" var="tweet">
+						<listitem>
+							<listcell>
+								<hlayout>
+									<image sclass="@load(tweet.authorIcon)" />
+									<div hflex="1">
+										<label sclass="author" value="@load(tweet.author)" />
+										<label style="color:gray;font-style:italy" value="@zkoss" />
+										<separator />
+										<label width="90%" sclass="content" multiline="true"
+											value="@load(tweet.content)" />
+									</div>
+								</hlayout>
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</tabpanel>
+			<tabpanel sclass="stories" vflex="1" hflex="1">
+				<listbox model="@load(vm.tweets)" vflex="1" hflex="1">
+					<template name="model" var="tweet">
+						<listitem>
+							<listcell>
+								<div>
+									<label width="90%" sclass="content" multiline="true"
+										value="@load(tweet.content)" />
+									<separator />
+									<image sclass="@load(tweet.authorIcon)" />
+									<label style="color:gray;" value="Tweeted by " />
+									<label style="color:gray;font-weight:bold" value="ZKoss" />
+								</div>
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	</center>
+	</borderlayout>
+</zk>

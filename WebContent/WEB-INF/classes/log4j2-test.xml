@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<Configuration status="WARN">   
+    <Appenders>    
+        <Console name="Console" target="SYSTEM_OUT">   
+            <PatternLayout pattern="[%-5level][%d{HH:mm:ss.SSS}][%C{3}][%markerSimpleName]:%msg%n"/>  
+       </Console> 
+        <RollingFile name="CCSLogger"
+            fileName="${sys:catalina.home}/logs/CCSHapag.log"
+            filePattern="logs/CCS-%d{yyyy-MM-dd}.log.gz"  immediateFlush="false" append="true">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>  
+    <Loggers>    
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="CCSLogger" />
+        </Root>  
+   </Loggers> 
+</Configuration>
