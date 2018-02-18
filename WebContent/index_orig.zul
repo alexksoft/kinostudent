@@ -26,49 +26,20 @@
 		firsttime = false;
 	}
 ]]></zscript>
-	<borderlayout>
-		<north style="text-align:center;">
-			<label style="font-family:Monotype Corsiva;font-size:44px;" value="Kinostudent"/>
-		</north>
-	<center>
 	<tabbox xmlns:ca="client/attribute" ca:data-swipeable="true" id="main" sclass="main" width="${zk.mobile > 0 ? '100%' : '80%'}"
 		vflex="1" onClientInfo="doOrientationChange(event)" tabscroll="false"
 		apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ks.ui.IndexVM')">
 	<!-- 	<custom-attributes org.zkoss.zul.image.preload="true" /> -->
-		<tabs  style="text-align:center;">
-			<tab label="Главная" image="/images/icons/icon_zk_white.png"/>
+		<tabs>
+			<tab label="Home" image="/images/icons/icon_zk_white.png"/>
 			
-			<tab label="Видео" image="/images/icons/icon_friendrequests_white.png"/>
+			<tab label="Connect" image="/images/icons/icon_friendrequests_white.png"/>
 
-			<tab label="Чтение" image="/images/icons/icon_messagestop_white.png"/>
-
-			<tab label="Словарь" image="/images/icons/icon_messagestop_white.png"/>
-
-			<tab label="Грамматика" image="/images/icons/icon_messagestop_white.png"/>
-
-			<tab label="Вопросы" image="/images/icons/icon_messagestop_white.png"/>
-
-			<tab label="Контакты" image="/images/icons/icon_messagestop_white.png"/>
+			<tab label="Discover" image="/images/icons/icon_messagestop_white.png"/>
 		</tabs>
 		<tabpanels vflex="1" hflex="1">
 			<tabpanel vflex="1" hflex="1">
-				<vlayout style="padding:40px;text-align: justify;">
-					
-					<label style="font-family:Cambria Math;font-size:16px;margin-top:40px;" value="Этот сайт предназначен для людей, изучающих русский язык как иностранный. Если у вас есть знакомые-иностранцы, обязательно пригласите их посетить эти уроки. Изложенная далее информация предназначена для них."></label>
-										
-					<label style="font-family:Cambria Math;font-size:16px; margin-left:60px;margin-top:40px;" value="Интересно, хочу попробовать бесплатно"></label>
-	
-					<label style="font-family:Cambria Math;font-size:16px;" value="Видео (название) "></label>
-					<html>
-						<script type="text/javascript" src="//s3.spruto.org/embed/player.js"></script> <script class="splayer"> var params = {"playlist":[{"video":[{"url":"http://p.spruto2.pulter.netdna-cdn.com/vod/spruto2.pulter/promo_eng.mp4"}],"duration":0,"posterUrl":"//s3.spruto.org/images/Spse_02_spruto_player_screen_eng_1024.jpg"}],"uiLanguage":"en","width":"640","height":"360"}; player.embed(params); </script>
-	
-					</html>
-					<label style="font-family:Cambria Math;font-size:16px;" value="Текст (название)"></label>
-	
-					<label style="font-family:Cambria Math;font-size:16px;" value="Купить абонемент и получить неограниченный доступ к материалам"></label>
-				</vlayout>
-
-<!-- 				<hlayout id="content" sclass="main-content" vflex="1">
+				<hlayout id="content" sclass="main-content" vflex="1">
 					<div id="sv" vflex="1" hflex="1"
 						children="@init(vm.profiles)">
 						<template name="children" var="profile">
@@ -121,7 +92,7 @@
 							</listitem>
 						</template>
 					</listbox>
-				</hlayout> -->
+				</hlayout>
 			</tabpanel>
 			<tabpanel sclass="connects" vflex="1" hflex="1">
 				<listbox model="@load(vm.stories)" vflex="1" hflex="1">
@@ -163,6 +134,4 @@
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
-	</center>
-	</borderlayout>
 </zk>
