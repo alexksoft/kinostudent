@@ -1,0 +1,51 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+    <window id="textListWindow"
+            height="99.5%"
+            width="99.5%"
+            border="none"
+            closable="false"
+            viewModel="@id('vm') @init('com.ks.ui.admin.TextListVM')">
+
+        <caption sclass="z-page-caption" style="text-align:left;">
+            <label style="margin-left: 10px;font-size:15px" value="Text"/>
+        </caption>
+
+        <borderlayout>
+            <north border="0" height="0px">
+
+            </north>
+            <center>
+
+                <div vflex="1" style="background: white;padding:2px">
+                    <div>
+                        <div class="subdivide-caption" >
+                            <hbox pack="stretch" width="100%">
+                                <toolbar align="end" style="float:right;border-width: 0;background: none;">
+                                    <toolbarbutton id="btnAdd" height="20" label="Add" iconSclass="fa-plus" onClick="@command('add')"/>
+                                </toolbar>
+                            </hbox>
+                        </div>
+                    </div>
+                    <grid id="masterDataGrid" vflex="1" model="@load(vm.text)" mold="paging" autopaging="true" pagingPosition="bottom">
+                        <columns>
+                            <column label="Type" align="left" sort="auto(type)"></column>
+                            <column label="Text" align="left" sort="auto(text)"></column>
+                        </columns>
+                        <template name="model">
+                            <row onDoubleClick="@command('edit', object = each)">
+                                <label value="@load(each.type)"/>
+                                <label value="@load(each.text)"/>
+                                <cell>
+                                    <toolbarbutton image="/images/edit-file-icon.png" tooltiptext="Edit" onClick="@command('edit', object = each)"/>
+                                    <toolbarbutton image="/images/delete-icon16.png" tooltiptext="Delete" onClick="@command('delete', object = each)"/>
+                                </cell>
+                            </row>
+                        </template>
+                    </grid>
+                </div>
+
+            </center>
+        </borderlayout>
+    </window>
+</zk>

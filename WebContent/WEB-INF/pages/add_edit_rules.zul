@@ -1,0 +1,48 @@
+<zk>
+    <window id="addEditWindow"
+            width="600px"
+            border="normal"
+            closable="true"
+            mode="modal"
+            viewModel="@id('vm') @init('com.ks.ui.admin.AddEditRulesVM')">
+        <caption id="caption"/>
+        <grid style="margin:5px;">
+            <columns>
+                <column label="" width="120px"></column>
+                <column label=""></column>
+            </columns>
+            <rows>
+                <row height="40px">
+                    <cell align="right">
+                        <label value="Title"></label>
+                        <label value="*" style="color:red;font-size:18px;"></label>
+                    </cell>
+                    <cell>
+                        <textbox width="400px" value="@bind(vm.rules.title)" constraint="no empty" mold="rounded"></textbox>
+                    </cell>
+                </row>
+                <row height="40px">
+                    <cell align="right">
+                        <label value="Text"></label>
+                    </cell>
+                    <cell>
+                        <textbox width="400px" value="@bind(vm.rules.text)"  maxlength="500"
+                                 constraint="" mold="rounded"></textbox>
+                    </cell>
+                </row>
+                <row>
+                    <cell  colspan="2">
+                        <hbox width="100%">
+                            <cell  align="center" width="50%">
+                                <button id="ok" label="Save" onClick="@command('save')" width="90px" height="25px"  iconSclass="fa-check"/>
+                            </cell>
+                            <cell align="center" width="50%">
+                                <button id="cancel" label="Cancel" onClick="@command('cancel')" width="90px" height="25px" iconSclass="fa-trash"/>
+                            </cell>
+                        </hbox>
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+    </window>
+</zk>
