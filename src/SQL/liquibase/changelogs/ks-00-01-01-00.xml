@@ -24,53 +24,53 @@
 			</sql>
 		</rollback>
 	</changeSet>
-	<!--<changeSet id="create-table" author="azhurylo">-->
-	<!--<sql>-->
-	<!--CREATE TABLE videos (-->
-	<!--id INT unsigned not null auto_increment primary key,-->
-	<!--type varchar(100) not null,-->
-	<!--video_url varchar(500) not null,-->
-	<!--description varchar(500)) ;-->
-	<!--</sql>-->
-	<!--<rollback>-->
-	<!--<sql>rollback ;</sql>-->
-	<!--</rollback>-->
-	<!--</changeSet>-->
-	<!--<changeSet id="create-text" author="azhurylo">-->
-	<!--<sql>-->
-	<!--CREATE TABLE text (-->
-	<!--id INT unsigned not null auto_increment primary key,-->
-	<!--type varchar(100) not null,-->
-	<!--text TEXT not null) ;-->
-	<!--</sql>-->
-	<!--<rollback>-->
-	<!--<sql>rollback;</sql>-->
-	<!--</rollback>-->
-	<!--</changeSet>-->
-	<!--<changeSet id="create-gramma-rules" author="azhurylo">-->
-	<!--<sql>-->
-	<!--CREATE TABLE gramma_rules (-->
-	<!--id INT unsigned not null auto_increment primary key,-->
-	<!--title varchar(500) not null,-->
-	<!--text TEXT not null) ;-->
-	<!--</sql>-->
-	<!--<rollback>-->
-	<!--<sql>rollback;</sql>-->
-	<!--</rollback>-->
-	<!--</changeSet>-->
-	<!--<changeSet id="create-word" author="azhurylo">-->
-	<!--<sql>-->
-	<!--CREATE TABLE kinostudent.word(-->
-	<!--id INT unsigned not null auto_increment primary key,-->
-	<!--word varchar(100) not null,-->
-	<!--translation1 varchar(100) not null,-->
-	<!--translation2 varchar(100),-->
-	<!--translation3 varchar(100),-->
-	<!--translation4 varchar(100),-->
-	<!--description varchar(500));-->
-	<!--</sql>-->
-	<!--<rollback>-->
-	<!--<sql>rollback;</sql>-->
-	<!--</rollback>-->
-	<!--</changeSet>-->
+	<changeSet id="create-table" author="azhurylo">
+	<sql>
+	CREATE TABLE videos (
+	id INT unsigned not null auto_increment primary key,
+	type varchar(100) not null,
+	video_url varchar(500) not null,
+	description varchar(500)) ;
+	</sql>
+	<rollback>
+	<sql>rollback ;</sql>
+	</rollback>
+	</changeSet>
+	<changeSet id="create-text" author="azhurylo">
+	<sql>
+	CREATE TABLE text (
+	id INT unsigned not null auto_increment primary key,
+	type varchar(100) not null,
+	text TEXT not null) ;
+	</sql>
+	<rollback>
+	<sql>rollback;</sql>
+	</rollback>
+	</changeSet>
+	<changeSet id="create-gramma-rules" author="azhurylo">
+	<sql>
+	CREATE TABLE gramma_rules (
+	id INT unsigned not null auto_increment primary key,
+	title varchar(500) not null,
+	text TEXT not null) ;
+	</sql>
+	<rollback>
+	<sql>rollback;</sql>
+	</rollback>
+	</changeSet>
+	<changeSet id="create-word" author="azhurylo">
+	<sql>
+	CREATE TABLE kinostudent.word(
+	id INT unsigned not null auto_increment primary key,
+	word varchar(100) not null,
+	translation1 varchar(100) not null,
+	translation2 varchar(100),
+	translation3 varchar(100),
+	translation4 varchar(100),
+	description varchar(500));
+	</sql>
+	<rollback>
+	<sql>rollback;</sql>
+	</rollback>
+	</changeSet>
 </databaseChangeLog>
